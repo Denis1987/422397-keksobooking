@@ -44,9 +44,7 @@ var pinsAmount = 8;
 
 var Template = document.querySelector('template');
 
-var getRandomNumber = function (min, max) {
-  return Math.floor(min + Math.random() * (max - min));
-};
+var pins = document.querySelector('.map__pins');
 
 var coordinates = {
   x: getRandomNumber(300, 600),
@@ -56,12 +54,17 @@ var coordinates = {
 
 var pins = [];
 
+var showMap = document.querySelector('.map');
+showMap.classList.remove('map--faded');
 
+var getRandomNumber = function (min, max) {
+  return Math.floor(min + Math.random() * (max - min));
+};
 
 
 var createCards = function () {
   for (var i = 0; i < pinsAmount; i++) {
-    var pin = {
+    var card = {
       "author": {
         "avatar": 'img/avatars/user' + getRandomNumber(0, 8) + '.png'
       },
@@ -85,13 +88,11 @@ var createCards = function () {
         "y": coordinates.y
       }
     }
-    pins.push(pin);
+    pins.push(card);
   }
   return cards;
 };
-console.log(offer);
-var showMap = document.querySelector('.map');
-showMap.classList.remove('map--faded');
+console.log(offer.card);
 
 //до этого места более-меннее осознано сделал а вот потом копировал и пробовал разобраться и выловить ошибки
 
@@ -108,11 +109,10 @@ var renderPins = function (mapPin) {
 
   return pinElement;
 };
-
+pins = renderPins;
 //console.log(pinTemplate);
 cards = createCards();
 
-var pins = document.querySelector('.map__pins');
 
 var fragmentPins = document.createDocumentFragment();
 
