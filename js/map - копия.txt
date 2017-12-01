@@ -60,7 +60,7 @@ var pins = [];
 
 
 var createCards = function () {
-  for (var i = 0; i < pinsAmount; i++) {
+  for (var i = 0; i < 8; i++) {
     var pin = {
       "author": {
         "avatar": 'img/avatars/user' + getRandomNumber(0, 8) + '.png'
@@ -85,7 +85,7 @@ var createCards = function () {
         "y": coordinates.y
       }
     }
-    pins.push(pin);
+    //    pins.push(pin);
   }
   return cards;
 };
