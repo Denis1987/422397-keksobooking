@@ -32,11 +32,11 @@ var features = [
   'conditioner'
 ];
 
-var types = [
-  'flat',
-  'house',
-  'bungalo'
-];
+//var types = [
+//  'flat',
+//  'house',
+//  'bungalo'
+//];
 
 var maxPrice = 100000;
 var minPrice = 1000;
@@ -67,7 +67,7 @@ showMap.classList.remove('map--faded');
 
 var getRandomElement = function (arr) {
   return arr[getRandomNumber(0, arr.length)];
-}
+};
 
 var getRandomElementNoRepeat = function (arr) {
   var index = getRandomNumber(0, arr.length);
@@ -75,7 +75,7 @@ var getRandomElementNoRepeat = function (arr) {
   var item = arr[index];
   arr.splice(index, 1);
   return item;
-}
+};
 
 var min = 0;
 
@@ -89,7 +89,7 @@ var getRandomSlice = function (arr) {
 
   }
   return result;
-}
+};
 
 var createCards = function () {
   var mapCards = [];
@@ -97,7 +97,7 @@ var createCards = function () {
     var coordinates = {
       x: getRandomNumber(300, 900),
       y: getRandomNumber(100, 500)
-    }
+    };
     var card = {
       "author": {
         "avatar": getRandomElementNoRepeat(avatars)
@@ -105,7 +105,7 @@ var createCards = function () {
 
       "offer": {
         "title": getRandomElement(title),
-        "address": coordinates.x + ", " + coordinates.y,
+        "address": coordinates.x + ', ' + coordinates.y,
         "price": getRandomNumber(minPrice, maxPrice),
         "types": getRandomNumber(minTypes, maxTypes),
         "rooms": getRandomNumber(minRooms, maxRooms),
@@ -121,7 +121,7 @@ var createCards = function () {
         "x": coordinates.x,
         "y": coordinates.y
       }
-    }
+    };
     mapCards.push(card);
   }
   return mapCards;
