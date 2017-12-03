@@ -51,7 +51,7 @@ var getRandomNumber = function (min, max) {
 };
 var avatars = [];
 for (var k = 1; k <= 8; k++) {
-  avatars.push('img/avatars/user0' + getRandomNumber(1, 8) + '.png');
+  avatars.push('img/avatars/user0' + k + '.png');
 }
 
 var pinsAmount = 8;
@@ -60,18 +60,14 @@ var Template = document.querySelector('template');
 
 var pinsContainer = document.querySelector('.map__pins');
 
-//это и есть наш массив
-
 var pins = [];
 
 var showMap = document.querySelector('.map');
 showMap.classList.remove('map--faded');
 
-
 var getRandomElement = function (arr) {
   return arr[getRandomNumber(0, arr.length)];
 }
-
 
 var getRandomElementNoRepeat = function (arr) {
   var index = getRandomNumber(0, arr.length);
@@ -81,21 +77,19 @@ var getRandomElementNoRepeat = function (arr) {
   return item;
 }
 
-
-
 var min = 0;
 
 var getRandomSlice = function (arr) {
-  var min = 0;
-  var max = arr.length;
-  var randomLeng = Math.round(min - 0.5 + Math.random() * (max - min + 1));
-  return arr.slice(min, randomLeng);
+
+  var randomLeng = getRandomNumber(1, arr.length);
+  var fullCopy = arr.slice();
+  var result = [];
+  for (var r = 0; r < randomLeng; r++) {
+    result.push(getRandomElementNoRepeat(fullCopy));
+
+  }
+  return result;
 }
-var result = getFeatures;
-
-
-
-
 
 var createCards = function () {
   var mapCards = [];
@@ -118,7 +112,7 @@ var createCards = function () {
         "guests": getRandomNumber(minGuests, maxGuests),
         "checkins": getRandomElement(checkins),
         "checkouts": getRandomElement(checkouts),
-        "features": features,
+        "features": getRandomSlice(features),
         "description": '',
         "photos": []
       },
@@ -133,13 +127,8 @@ var createCards = function () {
   return mapCards;
 };
 
-
-//до этого места более-меннее осознано сделал а вот потом копировал и пробовал разобраться и выловить ошибки
-
-//вот я нашел в дом дереве шаблон
 var pinTemplate = document.querySelector('template').content.querySelector('.map__pin');
 
-//здесь клонируется пин
 var renderPins = function (mapPin) {
   var pinElement = pinTemplate.cloneNode(true);
 
@@ -150,9 +139,8 @@ var renderPins = function (mapPin) {
   return pinElement;
 };
 pins = renderPins;
-//console.log(pinTemplate);
-var cards = createCards();
 
+var cards = createCards();
 
 var fragmentPins = document.createDocumentFragment();
 
@@ -160,11 +148,9 @@ cards.forEach(function (item) {
   fragmentPins.appendChild(renderPins(item));
 });
 
-
 pinsContainer.appendChild(fragmentPins);
 
 var carTemplate = Template.content.querySelector('.map__card');
-
 
 var renderCards = function (card) {
   var cardElement = carTemplate.cloneNode(true);
@@ -176,7 +162,9 @@ var renderCards = function (card) {
   cardElement.querySelector('h4 + p').textContent = card.offer.rooms + ' комнат для ' + card.offer.guests + ' гостей';
   cardElement.querySelector('.checkins').textContent = 'Заезд после ' + card.offer.checkins + ', выезд до ' + card.offer.checkouts;
   cardElement.querySelector('.popup__features').innerHTML = '';
-  cardElement.querySelector('.popup__features').insertAdjacentHTML('afterbegin', card.offer.features.map(getFeatures).join(' '));
+  for (var f = 0; f < card.offer.features.length; f++) {
+    cardElement.querySelector('.popup__features').innerHTML += '<li class="feature feature--' + card.offer.features[f] + '"></li>';
+  }
   cardElement.querySelector('.popup__description').textContent = card.offer.description;
   cardElement.querySelector('.popup__avatar').src = card.author.avatar;
 
