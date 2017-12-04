@@ -61,9 +61,21 @@ var Template = document.querySelector('template');
 var pinsContainer = document.querySelector('.map__pins');
 
 var pins = [];
-
 var showMap = document.querySelector('.map');
 showMap.classList.remove('map--faded');
+
+
+
+//function formHide() {
+//  document.querySelector('fieldset').disabled
+//}
+var formHide = function () {
+  document.querySelector('fieldset').disabled
+}
+
+
+
+
 
 var getRandomElement = function (arr) {
   return arr[getRandomNumber(0, arr.length)];
@@ -176,3 +188,21 @@ var fragmentCards = document.createDocumentFragment();
 fragmentCards.appendChild(renderCards(getRandomElement(cards)));
 
 showMap.appendChild(fragmentCards);
+
+
+var mapPinMainMouseup = function () {
+
+  var mapPinMain = document.querySelector('.map__pin--main');
+  var noticeForm = document.querySelector('.notice__form');
+  var showMap = document.querySelector('.map');
+  showMap.classList.remove('map--faded');
+  noticeForm.classList.remove('notice__form--disabled');
+  console.log(test);
+
+};
+
+//var firstCard = card[1];
+//firstCard.
+
+mapPinMain.addEventListener('mouseup', mapPinMainMouseup());
+mapPinMain.addEventListener('onmouseup', mapPinMainMouseup());
