@@ -62,7 +62,7 @@ var pinsContainer = document.querySelector('.map__pins');
 
 var pins = [];
 var showMap = document.querySelector('.map');
-showMap.classList.remove('map--faded');
+//showMap.classList.remove('map--faded');
 
 
 
@@ -189,20 +189,56 @@ fragmentCards.appendChild(renderCards(getRandomElement(cards)));
 
 showMap.appendChild(fragmentCards);
 
+var mapPinMain = document.querySelector('.map__pin--main');
+var noticeForm = document.querySelector('.notice__form');
+var showMap = document.querySelector('.map');
 
-var mapPinMainMouseup = function () {
+mapPinMain.addEventListener('mouseup') {
 
-  var mapPinMain = document.querySelector('.map__pin--main');
-  var noticeForm = document.querySelector('.notice__form');
-  var showMap = document.querySelector('.map');
-  showMap.classList.remove('map--faded');
-  noticeForm.classList.remove('notice__form--disabled');
-  console.log(test);
+  var mapPinMainMouseup = function () {
+
+    showMap.classList.remove('map--faded');
+    noticeForm.classList.remove('notice__form--disabled');
+    console.log('test');
+
+  };
 
 };
 
-//var firstCard = card[1];
-//firstCard.
+pinTemplate.classList.remove('map__card');
+var mapPin;
 
-mapPinMain.addEventListener('mouseup', mapPinMainMouseup());
-mapPinMain.addEventListener('onmouseup', mapPinMainMouseup());
+mapPin.addEventListener('click') {
+  pinTemplate.classList.add {
+    'map__pin--active'
+  };
+  pinTemplate.classList.add() {
+    'map__card'
+  };
+  if (mapPin(pin--active)) {
+    mapPin.classList.remove('pin--active')
+  }
+}
+
+var popupClose;
+
+popupClose.addEventListener('click') {
+  pinTemplate.classList.remove {
+    'map__pin--active'
+  };
+}
+
+var mapCard = document.querySelector('.map__card');
+var popupDescription = document.querySelector('.popup__description');
+
+//тут не понятно как сделать так чтобы о нажатию на enter оно проподало
+mapCard.addEventListener('keydown') {
+  if (mapPin = focus) {
+
+  }
+}
+//При показе карточки на карточке должна отображаться актуальная информация о текущем выбранном объекте (заголовок, адрес, цена, время заезда и выезда). Добавить обработчики для альтернативного ввода с клавиатуры keydown для кнопок открытия/закрытия объявлений:
+
+//Если пин объявления в фокусе .map__pin, то диалог с подробностями должен показываться по нажатию кнопки ENTER
+//Когда диалог открыт, то клавиша ESC должна закрывать диалог и деактивировать элемент .map__pin, который был помечен как активный
+//Если диалог открыт и фокус находится на крестике, то нажатие клавиши ENTER приводит к закрытию диалога и деактивации элемента .map__pin, который был помечен как активный
