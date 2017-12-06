@@ -189,56 +189,75 @@ fragmentCards.appendChild(renderCards(getRandomElement(cards)));
 
 showMap.appendChild(fragmentCards);
 
-var mapPinMain = document.querySelector('.map__pin--main');
-var noticeForm = document.querySelector('.notice__form');
-var showMap = document.querySelector('.map');
 
-mapPinMain.addEventListener('mouseup') {
 
-  var mapPinMainMouseup = function () {
 
-    showMap.classList.remove('map--faded');
-    noticeForm.classList.remove('notice__form--disabled');
-    console.log('test');
+var tokioMap = document.querySelector('.map');
+var mapFilter = document.querySelector('.map__filter');
 
-  };
-
+var initial = function () {
+  tokioMap.classList.add('map--faded');
+  for (var t = 0; t < cards.length; t++) {
+    cards[t].disabled = true;
+  }
+  for (var f = 0; f < mapFilter.length; f++) {
+    mapFilter[f].disabled = true;
+  }
 };
 
-pinTemplate.classList.remove('map__card');
-var mapPin;
+var mapPinMain = document.querySelector('.map__pin--main');
+var mapPins = document.querySelector('.map__pins');
+var noticeForm = document.querySelector('.notice__form');
+var active = false;
+var target = evt.target;
 
-mapPin.addEventListener('click') {
-  pinTemplate.classList.add {
-    'map__pin--active'
-  };
-  pinTemplate.classList.add() {
-    'map__card'
-  };
-  if (mapPin(pin--active)) {
-    mapPin.classList.remove('pin--active')
+
+mapPinMain.addEventListener('mouseup';
+
+  function () {
+    tokioMap.classList.remove('map--faded');
+    mapPins.appendChild(fragmentCards);
+    noticeForm.classList.remove('notice__form--disabled');
+    for (var u = 0; u < cards.length; u++) {
+      cards[u].disabled = false;
+    }
+    for (var p = 0; p < mapFiltersArray.length; p++) {
+      mapFilter[j].disabled = false;
+    }
+  });
+
+var esc = 27;
+
+var closePopup = function () {
+  mapCard.classList.add('hidden');
+  document.removeEventListener('keydown', pressEsc);
+};
+
+
+
+var popupEscClose = function (evt) {
+  if (evt.keycode == esc) {
+    closePopup();
   }
-}
+};
 
-var popupClose;
+var openPopup = function () {
+  mapPins.classList.remove('hidden');
+  document.addEventListener('keydown', pressEsc);
+};
 
-popupClose.addEventListener('click') {
-  pinTemplate.classList.remove {
-    'map__pin--active'
-  };
-}
+var pinMaps = tokioMap.querySelectorAll('.map__pin:not(:nth-child(2))');
+console.log(pinMaps);
 
-var mapCard = document.querySelector('.map__card');
-var popupDescription = document.querySelector('.popup__description');
-
-//тут не понятно как сделать так чтобы о нажатию на enter оно проподало
-mapCard.addEventListener('keydown') {
-  if (mapPin = focus) {
-
-  }
-}
-//При показе карточки на карточке должна отображаться актуальная информация о текущем выбранном объекте (заголовок, адрес, цена, время заезда и выезда). Добавить обработчики для альтернативного ввода с клавиатуры keydown для кнопок открытия/закрытия объявлений:
-
-//Если пин объявления в фокусе .map__pin, то диалог с подробностями должен показываться по нажатию кнопки ENTER
-//Когда диалог открыт, то клавиша ESC должна закрывать диалог и деактивировать элемент .map__pin, который был помечен как активный
-//Если диалог открыт и фокус находится на крестике, то нажатие клавиши ENTER приводит к закрытию диалога и деактивации элемента .map__pin, который был помечен как активный
+mapCards.addEventListener('click', function (evt) {
+      while (target !== mapPins) {
+        if (target.tagName === 'BUTTON') {
+          if (active !== false) {
+            active.classList.remove('map__pin--active')
+          }
+          active = target.classList.add('map__pin--active');
+          if (!target.classList.contains('map__pin--main')) {
+            renderCards(cards[getRandomNumber(1, 8)])
+            openPopup();
+          }
+        }
