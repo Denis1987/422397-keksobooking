@@ -1,5 +1,7 @@
 'use strict';
 
+
+//массив описание жилья
 var title = [
   'Большая уютная квартира',
   'Маленькая неуютная квартира',
@@ -11,18 +13,22 @@ var title = [
   'Неуютное бунгало по колено в воде'
 ];
 
+//время заcеления
 var checkins = [
   '12:00',
   '13:00',
   '14:00'
 ];
 
+//всемя выезда выезда из жилья 
 var checkouts = [
   '12:00',
   '13:00',
   '14:00'
 ];
 
+
+//преимущества жилья
 var features = [
   'wifi',
   'dishwasher',
@@ -32,12 +38,14 @@ var features = [
   'conditioner'
 ];
 
-//var types = [
-//  'flat',
-//  'house',
-//  'bungalo'
-//];
+//var types = {
+//  'flat': 'квартира',
+//  'house': 'дом',
+//  'bungalo': 'бунгало'
+//};
 
+
+//переменные
 var maxPrice = 100000;
 var minPrice = 1000;
 var maxGuests = 4;
@@ -46,14 +54,21 @@ var maxRooms = 4;
 var minRooms = 1;
 var maxTypes = 3;
 var minTypes = 0;
+
+//переменная для выдачи рандома
 var getRandomNumber = function (min, max) {
   return Math.floor(min + Math.random() * (max - min));
 };
+
+//массив аватарок
 var avatars = [];
+
+//цикл формирующий аватарку
 for (var k = 1; k <= 8; k++) {
   avatars.push('img/avatars/user0' + k + '.png');
 }
 
+//переменная сумма пинов
 var pinsAmount = 8;
 
 var Template = document.querySelector('template');
@@ -69,6 +84,7 @@ var showMap = document.querySelector('.map');
 //function formHide() {
 //  document.querySelector('fieldset').disabled
 //}
+//добавляет атрибут блокирования для формы по тегу филдсет
 var formHide = function () {
   document.querySelector('fieldset').disabled
 }
@@ -76,11 +92,12 @@ var formHide = function () {
 
 
 
-
+//получаем случайную длину массивва
 var getRandomElement = function (arr) {
   return arr[getRandomNumber(0, arr.length)];
 };
 
+//получаем случайный элемент массива
 var getRandomElementNoRepeat = function (arr) {
   var index = getRandomNumber(0, arr.length);
 
@@ -102,7 +119,7 @@ var getRandomSlice = function (arr) {
   }
   return result;
 };
-
+//функция создающая массив с карточками
 var createCards = function () {
   var mapCards = [];
   for (var i = 0; i < pinsAmount; i++) {
@@ -139,15 +156,19 @@ var createCards = function () {
   return mapCards;
 };
 
+//дотягиваемся от дотягиваемся template к map__pin
+
 var pinTemplate = document.querySelector('template').content.querySelector('.map__pin');
 
+
+//функция рисующая пины
 var renderPins = function (mapPin) {
   var pinElement = pinTemplate.cloneNode(true);
 
   pinElement.style.left = mapPin.location.x + 'px';
   pinElement.style.top = mapPin.location.y + 'px';
   pinElement.querySelector('img').src = mapPin.author.avatar;
-
+  pinElement.addEventListener('click', onPinClick);
   return pinElement;
 };
 pins = renderPins;
@@ -164,6 +185,7 @@ pinsContainer.appendChild(fragmentPins);
 
 var carTemplate = Template.content.querySelector('.map__card');
 
+//функция формирующая карточки
 var renderCards = function (card) {
   var cardElement = carTemplate.cloneNode(true);
 
@@ -190,74 +212,46 @@ fragmentCards.appendChild(renderCards(getRandomElement(cards)));
 showMap.appendChild(fragmentCards);
 
 
-
-
 var tokioMap = document.querySelector('.map');
-var mapFilter = document.querySelector('.map__filter');
-
-var initial = function () {
-  tokioMap.classList.add('map--faded');
-  for (var t = 0; t < cards.length; t++) {
-    cards[t].disabled = true;
-  }
-  for (var f = 0; f < mapFilter.length; f++) {
-    mapFilter[f].disabled = true;
-  }
-};
 
 var mapPinMain = document.querySelector('.map__pin--main');
-var mapPins = document.querySelector('.map__pins');
 var noticeForm = document.querySelector('.notice__form');
-var active = false;
-var target = evt.target;
 
+var activateMap = function () {
+  tokioMap.classList.remove('map--faded');
 
-mapPinMain.addEventListener('mouseup';
+  noticeForm.classList.remove('notice__form--disabled');
 
-  function () {
-    tokioMap.classList.remove('map--faded');
-    mapPins.appendChild(fragmentCards);
-    noticeForm.classList.remove('notice__form--disabled');
-    for (var u = 0; u < cards.length; u++) {
-      cards[u].disabled = false;
-    }
-    for (var p = 0; p < mapFiltersArray.length; p++) {
-      mapFilter[j].disabled = false;
-    }
+  var fragmentPins = document.createDocumentFragment();
+
+  cards.forEach(function (item) {
+    fragmentPins.appendChild(renderPins(item));
   });
+  pinsContainer.appendChild(fragmentPins);
 
-var esc = 27;
-
-var closePopup = function () {
-  mapCard.classList.add('hidden');
-  document.removeEventListener('keydown', pressEsc);
+  mapPinMain.removeEventListener('mouseup', activateMap);
 };
 
+mapPinMain.addEventListener('mouseup', activateMap);
 
-
-var popupEscClose = function (evt) {
-  if (evt.keycode == esc) {
-    closePopup();
+pinTemplate.addEventListener('click') {
+  if (pinTemplate 'focus') {
+    pinTemplate.addEventListener('enter')
+    pinTemplate.classList.add('map__pin--active')
   }
-};
+  pinTemplate.classList.add('map__pin--active')
+  if (pinTemplate = ('.pin--active') {
+      pinTemplate.classList.remove('pin--active')
+    }
+  }
+}
 
-var openPopup = function () {
-  mapPins.classList.remove('hidden');
-  document.addEventListener('keydown', pressEsc);
-};
+var popupClose = document.querySelector('.popup__close');
 
-var pinMaps = tokioMap.querySelectorAll('.map__pin:not(:nth-child(2))');
-console.log(pinMaps);
-
-mapCards.addEventListener('click', function (evt) {
-      while (target !== mapPins) {
-        if (target.tagName === 'BUTTON') {
-          if (active !== false) {
-            active.classList.remove('map__pin--active')
-          }
-          active = target.classList.add('map__pin--active');
-          if (!target.classList.contains('map__pin--main')) {
-            renderCards(cards[getRandomNumber(1, 8)])
-            openPopup();
-          }
-        }
+popupClose.addEventListener('click') {
+  if (popupClose 'focus') {
+    popupClose.addEventListener('esc')
+    pinTemplate.classList.remove('map__pin--active')
+  }
+  pinTemplate.classList.remove('map__pin--active')
+}
