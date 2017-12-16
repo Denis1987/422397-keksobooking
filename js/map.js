@@ -232,6 +232,7 @@ var activateMap = function () {
   mapPinMain.removeEventListener('mouseup', activateMap);
 };
 
+
 mapPinMain.addEventListener('mouseup', activateMap);
 
 pinTemplate.addEventListener('onClick'function (evt)) {
