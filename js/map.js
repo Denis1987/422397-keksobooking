@@ -234,8 +234,8 @@ var activateMap = function () {
 
 mapPinMain.addEventListener('mouseup', activateMap);
 
-pinTemplate.addEventListener('click') {
-  if (pinTemplate 'focus') {
+pinTemplate.addEventListener('onClick'function (evt)) {
+  if (pinTemplate == 'focus') {
     pinTemplate.addEventListener('enter')
     pinTemplate.classList.add('map__pin--active')
   }
@@ -248,8 +248,8 @@ pinTemplate.addEventListener('click') {
 
 var popupClose = document.querySelector('.popup__close');
 
-popupClose.addEventListener('click') {
-  if (popupClose 'focus') {
+function ClickClose(popupClose.addEventListener 'onClick') {
+  if (popupClose == 'focus') {
     popupClose.addEventListener('esc')
     pinTemplate.classList.remove('map__pin--active')
   }
